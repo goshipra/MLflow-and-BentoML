@@ -132,7 +132,6 @@ For BentoML UI on your browser, you need to enable port 3000 in inbound rules in
  
 <img width="1011" height="726" alt="Screenshot 2026-02-19 at 4 17 02 PM" src="https://github.com/user-attachments/assets/7a6312e7-2dc6-4fd8-be54-a4f51acaf095" />
 
-<img width="1011" height="726" alt="Screenshot 2026-02-19 at 4 17 02 PM" src="https://github.com/user-attachments/assets/b8594a76-fcd8-434e-9eea-ee2c7cbfb247" />
 
 #####   
 ##### for MLflow UI, run below command on terminal: 
