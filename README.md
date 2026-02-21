@@ -1,15 +1,37 @@
 # MLflow and BentoML Setup and IRIS data Experiment
 
-# Objective
+### Objective
  
- - Setup an EC2 Instance where I setup mlflow for experiment tracking and BentoML for turning our machine learning model into production-ready API.
+ This project demonstrates a complete end-to-end Machine Learning pipeline on AWS EC2. It covers experiment tracking with MLflow, model packaging with BentoML, and deploying the model as a production-ready API.
 
+### Architecture
+MLflow: Tracks hyperparameters and metrics, and stores the trained Iris model.
 
-# Steps:
-#### 1. Setup AWS EC2 Instance:
- I created an AWS EC2 Virtual Machine for this Project.
+BentoML: Pulls the model from the registry and wraps it in a high-performance API service.
 
- - Go to AWS console > Search EC2 > Launch Instance > Choose instance type of your choice(I used t2.micro) > key pair > Security group > Launch Instance
+AWS EC2: Hosts the entire stack within a scalable virtual environment.
+
+### Prerequisites
+An active AWS Account.
+
+SSH client installed on your local machine.
+
+Basic knowledge of Python and CLI.
+
+## Steps:
+#### 1.  Infrastructure Setup
+    
+Launch EC2 Instance
+
+Navigate to the AWS Console > EC2 > Launch Instance.
+
+AMI: Amazon Linux
+
+Instance Type: t2.micro (Free Tier eligible).
+
+Key Pair: Create or select an existing .pem key.
+
+Security Group: Ensure SSH (Port 22) is open. We will open application ports later.
 
  - Connect to created Instance by using ssh command from you AWS CLI from local terminal.
 
@@ -41,11 +63,10 @@
 
 <img width="939" height="332" alt="Screenshot 2026-02-19 at 3 33 10 PM" src="https://github.com/user-attachments/assets/bfe7da73-045f-408d-a490-c3e4608fb33f" />
 
-
-#### 2. Train and Register with MLflow
-We will use the Iris dataset for a simple classification model. This script trains the model, logs the metrics, and registers it in the MLflow Model Registry.
-
-##### Create a folder and cd into the folder and Create a file named train.py:
+ #### 2. Model Training & Tracking
+We use the classic Iris dataset to train a classification model. 
+##### Create a folder and cd into the folder and Create a file named train.py, This script trains the model, logs the metrics, and registers it in the MLflow Model Registry.
+:
 
 
 
@@ -71,6 +92,9 @@ Then Excute the file using
 
 <img width="565" height="103" alt="Screenshot 2026-02-19 at 3 56 46 PM" src="https://github.com/user-attachments/assets/b0417aa7-acf5-4488-a0aa-f5e6bcbf20b0" />
 
+#### 3. BentoML Integration
+To transition from a "file" to a "service," we need to import the model into the BentoML local store.
+
 ##### create a file import_bento.py, you can copy the code from repository
 
 <img width="682" height="56" alt="Screenshot 2026-02-19 at 4 00 57 PM" src="https://github.com/user-attachments/assets/770868e0-60af-40af-9a2e-32215be1409a" />
@@ -89,8 +113,8 @@ Then Excute the file using
 
  <img width="738" height="119" alt="Screenshot 2026-02-19 at 4 01 35 PM" src="https://github.com/user-attachments/assets/a6f887fb-7dfe-476f-b8a9-4ce374effbae" />
 
-
- #### 3. Now we create service.py file, you can copy the code from repository
+#### 4. Deployment & UI Access
+ ##### Now we create service.py file, you can copy the code from repository
 
  ``` vim service.py ```
 
@@ -101,7 +125,6 @@ Then Excute the file using
 
  <img width="811" height="184" alt="Screenshot 2026-02-19 at 4 14 24 PM" src="https://github.com/user-attachments/assets/2c9826bd-be06-4048-889a-a52e42cfe58b" />
 
- #### 4. Access the UI of BentoML and MLflow
 
 For BentoML UI on your browser, you need to enable port 3000 in inbound rules in Security groups in AWS : 
 
