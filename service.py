@@ -2,7 +2,6 @@ import bentoml
 import numpy as np
 
 # Load the model imported from MLflow
-# Note: In 1.4+, we treat the model as a dependency of the service
 iris_model = bentoml.mlflow.get("iris_bento:latest")
 
 @bentoml.service(
